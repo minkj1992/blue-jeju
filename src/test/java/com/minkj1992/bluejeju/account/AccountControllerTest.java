@@ -17,12 +17,12 @@ class AccountControllerTest {
 
     @Autowired private MockMvc mockMvc;
 
-    @DisplayName("회원가입 화면 보이는지 테스트")
+    @DisplayName("회원가입 화면 테스트")
     @Test
     void signUpForm() throws Exception {
         mockMvc.perform(get("/account/sign-up"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("account/sign-up"));
     }
-    
+
 }
