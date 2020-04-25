@@ -12,3 +12,7 @@
     - Spring Cloud
         1. Spring Cloud Netflix
         2. Spring Cloud Kubernetes
+        
+- Git branch
+    - lecture: Lecture 강의 들으며 뼈대 생성
+    - dev: 실제 Blue-Jeju 프로젝트(최종적으로 여기로 병합)
