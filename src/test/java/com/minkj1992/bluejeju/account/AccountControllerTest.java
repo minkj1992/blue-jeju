@@ -8,7 +8,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+<<<<<<< HEAD
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+=======
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+>>>>>>> lecture
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -16,6 +21,7 @@ class AccountControllerTest {
 
     @Autowired private MockMvc mockMvc;
 
+<<<<<<< HEAD
     @DisplayName("회원가입 화면 테스트")
     @Test
     void signUpForm() throws Exception {
@@ -26,4 +32,14 @@ class AccountControllerTest {
                 ;
     }
 
+=======
+    @DisplayName("회원가입 화면 보이는지 테스트")
+    @Test
+    void signUpForm() throws Exception {
+        mockMvc.perform(get("/account/sign-up"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("account/sign-up"));
+    }
+    
+>>>>>>> lecture
 }
