@@ -71,6 +71,7 @@ class AccountControllerTest {
         Account account = accountRepository.findByEmail(userEmail);
         assertNotNull(account);
         assertNotEquals(account.getPassword(), userPassword); //encrypt 되어야 한다.
+        assertNotNull(account.getEmailCheckToken());
         then(javaMailSender).should().send(any(SimpleMailMessage.class));
     }
 

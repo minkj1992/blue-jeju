@@ -17,6 +17,11 @@
     - lecture: Lecture 강의 들으며 뼈대 생성
     - dev: 실제 Blue-Jeju 프로젝트(최종적으로 여기로 병합)
 
+- layout 관리
+  - Repository 또한 `Domain` level로 취급한다.
+  - Repository를 controller에 사용하겠다.
+  - Account와 같은 도메인과 다른 package이지만, 같은 level로 취급하겠다는 뜻
+  - **대신 Service나 Controller를 `Domain`과 `Repository` Entity에서 참조하지 않겠다.**
 
 <!-- TOC -->
 
