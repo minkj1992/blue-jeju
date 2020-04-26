@@ -1,5 +1,6 @@
 package com.minkj1992.bluejeju.account;
 
+import com.minkj1992.bluejeju.domain.Account;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.then;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
@@ -57,15 +59,18 @@ class AccountControllerTest {
     @Test
     void signUpSubmit_with_correct_input() throws Exception {
         String userEmail = "minkj1992@email.com";
+        String userPassword = "12345678";
         mockMvc.perform(post("/sign-up")
                 .param("nickname", "minkj1992")
                 .param("email", userEmail)
-                .param("password", "12345678")
+                .param("password", userPassword)
                 .with(csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/"));
 
-        assertTrue(accountRepository.existsByEmail(userEmail));
+        Account account = accountRepository.findByEmail(userEmail);
+        assertNotNull(account);
+        assertNotEquals(account.getPassword(), userPassword); //encrypt 되어야 한다.
         then(javaMailSender).should().send(any(SimpleMailMessage.class));
     }
 
