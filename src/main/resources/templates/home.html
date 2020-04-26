@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header"/>
+<body class="text-center">
+<link rel="stylesheet" th:href="@{/css/cover.css}"/>
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="masthead mb-auto"></header>
+
+    <main role="main" class="inner cover">
+        <h1 class="cover-heading"><b><span style="color:#ffa0ca">BLUE</span>JEJU</b></h1>
+        <p class="lead"><em>Commnity for Developer who loves Jeju Island</em></p>
+        <p class="lead">
+            <a href="#" class="btn btn-lg pink-btn"><em>Let's Surf</em></a>
+        </p>
+    </main>
+
+    <div class="mt-auto">
+        <div th:replace="fragments/footer :: footer"/>
+    </div>
+</div>
+</body>
+</html>
