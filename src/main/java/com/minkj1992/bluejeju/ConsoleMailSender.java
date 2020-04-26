@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 import javax.mail.internet.MimeMessage;
 import java.io.InputStream;
 
+
+// 테스트용 가짜 객체
 @Profile("local")
 @Component
 @Slf4j
@@ -47,7 +49,7 @@ public class ConsoleMailSender implements JavaMailSender {
 
     @Override
     public void send(SimpleMailMessage simpleMailMessage) throws MailException {
-        log.info(simpleMailMessage.getText());
+        log.info(simpleMailMessage.getText());  //log로 확인 가능
     }
 
     @Override
