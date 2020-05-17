@@ -23,4 +23,11 @@ docker run -p 8080:8080 -v /var/run/docker.sock:/var/run/docker.sock -v /home/mi
 - Docker URL 설정
   - `http://localhost:8080/configure`의 Docker Builder
   - `unix:///var/run/docker.sock` 설정
-  - 
+
+
+> Maven 세팅 / Dockerize 세팅
+
+## 특이점 (20/05/17 5:50 PM)
+현재 특이점이 온것은 내가 협업 관계가 아니다 보니, CI/CD를 하는 범위와 목적이 그저 CI/CD를 체험해 보기 위함일 뿐이라는 것을 깨달았다. AWS 서버를 지속적으로 사용할 서비스가 있는 것도 아니고, 그렇다고 merge conflict가 일어날 경우도 현재 존재하지 않는다. 
+
+단지 내가 spring 서비스를 remote에 push 하면 webhook이 동작하여 Docker Image로 구성한 Jenkins가 동작하도록 trigger가 발생하고 이후 unit test 및 통합테스트를 진행한 뒤 docker image로 나의 서비스를 build해주면 종료가 되도록 진행하는것이 최선의 상황인 것 같다.
