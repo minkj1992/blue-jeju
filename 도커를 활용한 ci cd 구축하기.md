@@ -1,6 +1,23 @@
-# 1. 도컬를 활용한 CI/CD 구축하기
+# 1. 도커를 활용한 CI/CD 구축하기
 > 목표: Docker 기반 Nginx, Jenkins, github webhook +a(AWS)를 활용한 CI/CD 환경 세팅방법을 정리한다.
 > 해당 글은 Local 환경에서 ssh 키 기반으로 github server에 존재하는 repository에 webhook trigger가 가능하도록 하는 것을 1차적 목표로 구현한다.
+
+<!-- TOC -->
+
+- [1. 도커를 활용한 CI/CD 구축하기](#1-%eb%8f%84%ec%bb%a4%eb%a5%bc-%ed%99%9c%ec%9a%a9%ed%95%9c-cicd-%ea%b5%ac%ec%b6%95%ed%95%98%ea%b8%b0)
+  - [1.1. Jenkins with Docker](#11-jenkins-with-docker)
+  - [1.2. Jenkins Setting](#12-jenkins-setting)
+    - [1.2.1. jenkins 플러그인 설치](#121-jenkins-%ed%94%8c%eb%9f%ac%ea%b7%b8%ec%9d%b8-%ec%84%a4%ec%b9%98)
+      - [1.2.1.1. 플러그인 설치 에러 핸들링](#1211-%ed%94%8c%eb%9f%ac%ea%b7%b8%ec%9d%b8-%ec%84%a4%ec%b9%98-%ec%97%90%eb%9f%ac-%ed%95%b8%eb%93%a4%eb%a7%81)
+      - [1.2.1.2. github integration with jenkins](#1212-github-integration-with-jenkins)
+    - [1.2.2. jenkins SSH 설정](#122-jenkins-ssh-%ec%84%a4%ec%a0%95)
+  - [1.3. Github Webhook with Jenkins](#13-github-webhook-with-jenkins)
+    - [1.3.1. 플러그인 다운로드](#131-%ed%94%8c%eb%9f%ac%ea%b7%b8%ec%9d%b8-%eb%8b%a4%ec%9a%b4%eb%a1%9c%eb%93%9c)
+  - [1.4. c.f) 도커 bind-mount 위치 변경하기](#14-cf-%eb%8f%84%ec%bb%a4-bind-mount-%ec%9c%84%ec%b9%98-%eb%b3%80%ea%b2%bd%ed%95%98%ea%b8%b0)
+  - [1.5. 빌드 실패](#15-%eb%b9%8c%eb%93%9c-%ec%8b%a4%ed%8c%a8)
+
+<!-- /TOC -->
+
 
 - Nginx (무중단 배포)
 - Jenkins, Github (for CI)
@@ -83,10 +100,10 @@
       docker restart <container_name>
    ```
 
-#### github integration with jenkins
+#### 1.2.1.2. github integration with jenkins
 - `github integration` 플러그인 다운로드
 
-### jenkins SSH 설정
+### 1.2.2. jenkins SSH 설정
 > [참고 URI](https://jojoldu.tistory.com/442)
 
 1. SSH 키 생성하기
@@ -111,19 +128,17 @@ root@minkj1992-900X5L:/var/lib/jenkins/.ssh# ssh-keygen -t rsa -f /var/lib/jenki
     - 키 등록
 2. 젠킨스 Item 등록하기(Credentials 권한 부여)
 
-## Github Webhook with Jenkins
+## 1.3. Github Webhook with Jenkins
 > [참고 URL](https://shmoon.tistory.com/11)
 
-### 플러그인 다운로드
+### 1.3.1. 플러그인 다운로드
 > jenkinsr관리 -> 플러그인 관리-> 고급 -> 플러그인 올리기
 - Maven Plugin
 - Docker-build-Step
 - Docker-plugin
 
 
-
-
-## c.f) 도커 bind-mount 위치 변경하기
+## 1.4. c.f) 도커 bind-mount 위치 변경하기
 > [참고자료](https://stackoverflow.com/questions/28302178/how-can-i-add-a-volume-to-an-existing-docker-container)
 > Jenkins 관련 파일 지우고 싶지 않기 때문에, host에서 copy를 진행해줌과 동시에, mount config.json 위치를 변경해준다.
 0. docker <container_name> stop
@@ -138,3 +153,10 @@ root@minkj1992-900X5L:/var/lib/docker/containers/9dd2eebd138ca70be6887b902969556
 minkj1992@minkj1992-900X5L:~/code/blue-jeju$ mv jenkins ~/jenkins
 minkj1992@minkj1992-900X5L:service docker restart
 ```
+
+
+## 1.5. 빌드 실패
+- 도커를 활용한 CI_CD구축기2에서 삽질 계속
+
+
+
